@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}CareerBridge AI{% endblock %}</title>
+<style>
+:root{--ink:#172033;--muted:#64748b;--brand:#5145cd;--brand2:#7c3aed;--bg:#f5f7ff;--line:#e2e8f0;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px max(5%,calc((100% - 1120px)/2));background:#fff;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{font-weight:800;color:var(--brand);font-size:20px;text-decoration:none}.navlinks{display:flex;gap:15px;flex-wrap:wrap}.navlinks a{color:#334155;text-decoration:none;font-weight:600;font-size:14px}
+main{max-width:1120px;margin:30px auto;padding:0 20px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 24px #17203308}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}.muted{color:var(--muted)}.pill{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:99px;padding:6px 10px;font-size:12px;font-weight:700}
+.btn,button{display:inline-block;border:0;border-radius:10px;padding:11px 16px;background:var(--brand);color:white;text-decoration:none;font-weight:700;cursor:pointer}.btn.secondary{background:#eef2ff;color:#4338ca}.btn.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:white}label{font-weight:700;font-size:14px}
+h1{font-size:clamp(28px,4vw,42px);margin:0 0 12px}h2{margin-top:0}h3{margin-top:0}.flash{padding:12px 15px;background:#eef2ff;color:#3730a3;border-radius:10px;margin-bottom:15px}
+footer{text-align:center;padding:35px 15px;color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}.tablewrap{overflow-x:auto}
+@media(max-width:600px){nav{padding:14px}.navlinks{gap:10px}main{margin:20px auto;padding:0 14px}.card{padding:19px}}
+</style>
+</head>
+<body>
+<nav>
+<a class="brand" href="{{ url_for('home') }}">🌉 CareerBridge AI</a>
+<div class="navlinks">
+<a href="{{ url_for('jobs') }}">Find Jobs</a>
+{% if session.get('user_id') %}
+<a href="{{ url_for('dashboard') }}">Dashboard</a><a href="{{ url_for('career') }}">Career Plan</a><a href="{{ url_for('profile') }}">My Skills</a><a href="{{ url_for('resume') }}">Resume Check</a><a href="{{ url_for('logout') }}">Logout</a>
+{% else %}
+<a href="{{ url_for('login') }}">Login</a><a href="{{ url_for('register') }}">Register</a>
+{% endif %}
+</div>
+</nav>
+<main>
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}<div class="flash">{{ message }}</div>{% endfor %}
+{% endwith %}
+{% block content %}{% endblock %}
+</main>
+<footer>CareerBridge AI · Career discovery and job-search support for freshers</footer>
+</body>
+</html>

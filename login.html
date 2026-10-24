@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Login | CareerBridge AI{% endblock %}
+{% block content %}
+<div class="card" style="max-width:480px;margin:0 auto">
+<h1>Welcome back 👋</h1><p class="muted">Log in to continue your career journey.</p>
+<form method="POST" action="{{ url_for('login') }}">
+<label>Email Address</label><input type="email" name="email" autocomplete="email" required>
+<label>Password</label><input type="password" name="password" autocomplete="current-password" required>
+<button type="submit" style="width:100%">Login</button>
+</form>
+<p class="muted">New here? <a href="{{ url_for('register') }}">Create an account</a></p>
+</div>
+{% endblock %}

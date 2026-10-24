@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}My Skills | CareerBridge AI{% endblock %}
+{% block content %}
+<div class="card" style="max-width:760px;margin:auto">
+<h1>My Skills 🧠</h1><p class="muted">Add skills separated by commas. Example: SQL, Excel, Communication</p>
+<form method="POST" action="{{ url_for('profile') }}">
+<label>Full Name</label><input value="{{ user['full_name'] }}" disabled>
+<label>Education</label><input value="{{ user['education'] }}" disabled>
+<label>Current skills</label><textarea name="skills" rows="5" placeholder="Python, SQL, Excel, Communication">{{ user["skills"] or "" }}</textarea>
+<button type="submit">Save Skills</button>
+</form>
+<p class="muted">Skill suggestions: {{ all_skills|join(", ") }}</p>
+</div>
+{% endblock %}

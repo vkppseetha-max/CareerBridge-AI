@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Resume Keyword Check | CareerBridge AI{% endblock %}
+{% block content %}
+<div class="card" style="max-width:760px;margin:auto">
+<h1>Resume Keyword Check 📄</h1>
+<p class="muted">Upload a plain-text (.txt) resume. The tool checks whether common career skills appear in the text.</p>
+<form method="POST" enctype="multipart/form-data" action="{{ url_for('resume') }}">
+<label>Choose resume (.txt only, max 500 KB)</label><input type="file" name="resume_file" accept=".txt,text/plain" required>
+<button type="submit">Analyze Resume</button>
+</form>
+{% if found_skills %}
+<hr><h2>Skills detected</h2><div>{% for skill in found_skills %}<span class="pill" style="margin:4px">{{ skill }}</span>{% endfor %}</div>
+<p><strong>{{ found_skills|length }}</strong> skill keywords found.</p>
+{% elif text_preview %}
+<hr><h2>No known skill keywords detected</h2><p>Try checking your resume wording and include relevant skills you genuinely have.</p>
+{% endif %}
+<p class="muted" style="font-size:13px;margin-top:20px">This is a basic keyword scan, not a full AI evaluation or a guarantee of job suitability. Your file is processed locally by this app and is not saved to disk by this route.</p>
+</div>
+{% endblock %}

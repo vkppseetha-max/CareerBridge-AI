@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | CareerBridge AI{% endblock %}
+{% block content %}
+<h1>Hello, {{ user["full_name"] }} 👋</h1>
+<p class="muted">Your career dashboard · {{ user["education"] }} · {{ user["career_interest"] }}</p>
+<div class="grid" style="margin:20px 0">
+<div class="card"><span class="pill">YOUR PROFILE</span><h2 style="margin-top:12px">{{ user["education"] }}</h2><p class="muted">Career interest: {{ user["career_interest"] }}</p><a class="btn secondary" href="{{ url_for('profile') }}">Update skills</a></div>
+<div class="card"><span class="pill">NEXT STEP</span><h2 style="margin-top:12px">Build job-ready skills</h2><p class="muted">Use your career roadmap to plan what to learn next.</p><a class="btn" href="{{ url_for('career') }}">View career plan</a></div>
+</div>
+<div class="grid">
+<section class="card"><h2>Skills to work on</h2>
+{% if missing %}<p class="muted">Based on your selected career interest and skills profile:</p><ul>{% for skill in missing %}<li>{{ skill }}</li>{% endfor %}</ul>{% else %}<p>Add your current skills to your profile to get a more useful gap guide.</p>{% endif %}
+<a href="{{ url_for('profile') }}">Edit my skills →</a></section>
+<section class="card"><h2>Recommended job searches</h2>
+{% for job in jobs %}<div style="padding:12px 0;border-bottom:1px solid #e2e8f0"><strong>{{ job.title }}</strong><p class="muted" style="margin:5px 0">{{ job.category }} · Skills: {{ job.skills|join(", ") }}</p><a href="{{ job.url }}" target="_blank" rel="noopener">Search opportunities ↗</a>
+<form method="POST" action="{{ url_for('apply', job_id=job.id) }}" style="margin-top:8px"><button class="btn secondary" type="submit">Save to tracker</button></form></div>{% endfor %}
+<a href="{{ url_for('jobs') }}">Browse all job categories →</a></section>
+</div>
+<section class="card" style="margin-top:20px"><h2>My application tracker</h2>
+{% if applications %}
+<div class="tablewrap"><table><thead><tr><th>Job</th><th>Status</th><th>Update</th></tr></thead><tbody>
+{% for item in applications %}<tr><td>{{ item["job_title"] }}</td><td>{{ item["status"] }}</td><td><form method="POST" action="{{ url_for('update_status', application_id=item['id']) }}"><select name="status"><option {% if item["status"]=="Saved" %}selected{% endif %}>Saved</option><option {% if item["status"]=="Applied" %}selected{% endif %}>Applied</option><option {% if item["status"]=="Interview" %}selected{% endif %}>Interview</option><option {% if item["status"]=="Rejected" %}selected{% endif %}>Rejected</option><option {% if item["status"]=="Offer" %}selected{% endif %}>Offer</option></select><button type="submit">Update</button></form></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<p class="muted">You have not saved any jobs yet. Choose “Save to tracker” on a job to start.</p>{% endif %}
+</section>
+{% endblock %}

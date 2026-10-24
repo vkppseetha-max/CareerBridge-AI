@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Create Account | CareerBridge AI{% endblock %}
+{% block content %}
+<div class="card" style="max-width:560px;margin:0 auto">
+<h1>Create Account 🚀</h1><p class="muted">Start your career journey with CareerBridge AI.</p>
+<form method="POST" action="{{ url_for('register') }}">
+<label>Full Name</label><input name="full_name" autocomplete="name" required>
+<label>Email Address</label><input type="email" name="email" autocomplete="email" required>
+<label>Password (minimum 6 characters)</label><input type="password" name="password" minlength="6" autocomplete="new-password" required>
+<label>Education</label><select name="education" required>
+<option value="">Select your degree</option><option>BCA</option><option>B.Com</option><option>B.Sc</option><option>BBA</option><option>BA</option><option>B.Tech</option><option>Other</option>
+</select>
+<label>Career Interest</label><select name="career_interest" required>
+<option value="">Choose your interest</option><option value="IT">IT & Software</option><option value="Data Analytics">Data Analytics</option><option value="Accounts">Accounts & Finance</option><option value="Office">Office & MIS</option><option value="Customer Support">Customer Support</option><option value="Business">Business & HR</option><option value="Marketing">Digital Marketing</option><option value="Any Suitable Career">Explore All Careers</option>
+</select>
+<button type="submit" style="width:100%">Create My Account</button>
+</form>
+<p class="muted">Already registered? <a href="{{ url_for('login') }}">Login here</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}CareerBridge AI | Your Next Step Starts Here{% endblock %}
+{% block content %}
+<section class="card" style="padding:clamp(28px,6vw,64px);background:linear-gradient(130deg,#eef2ff,#fff 55%,#fce7f3)">
+<span class="pill">CAREER GUIDANCE FOR EVERY DEGREE</span>
+<h1 style="margin-top:18px;max-width:760px">Your next career step starts <span style="color:#5145cd">here.</span></h1>
+<p class="muted" style="font-size:18px;line-height:1.7;max-width:700px">Explore career paths, discover skills to learn, find fresher job-search links, check resume keywords, and track opportunities in one place.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:25px">
+<a class="btn" href="{{ url_for('register') }}">Create free account →</a>
+<a class="btn secondary" href="{{ url_for('jobs') }}">Explore job categories</a>
+</div>
+<p class="muted" style="font-size:13px;margin-top:18px">For BCA, B.Com, B.Sc, BBA, BA, B.Tech and other graduates.</p>
+</section>
+<section class="grid" style="margin-top:20px">
+<div class="card"><h3>🎯 Career Finder</h3><p class="muted">Explore career directions based on your education and interests.</p></div>
+<div class="card"><h3>🔎 Job Search</h3><p class="muted">Browse fresher and internship search links across job categories.</p></div>
+<div class="card"><h3>🧠 Skill Gap Guide</h3><p class="muted">Compare your listed skills with a beginner roadmap.</p></div>
+<div class="card"><h3>📄 Resume Keyword Check</h3><p class="muted">Find common skills mentioned in a plain-text resume.</p></div>
+</section>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Career Plan | CareerBridge AI{% endblock %}
+{% block content %}
+<h1>Your Career Learning Plan 🎯</h1>
+<p class="muted">Suggested starter roadmap for {{ user["career_interest"] }}. Adjust it based on the role you choose.</p>
+<div class="grid">
+<div class="card"><span class="pill">STEP 1</span><h2 style="margin-top:12px">Build the basics</h2><p>Learn core concepts and practise regularly. Keep notes of what you can do independently.</p></div>
+<div class="card"><span class="pill">STEP 2</span><h2 style="margin-top:12px">Practise with a project</h2><p>Create one small project or practical work sample to demonstrate your skills.</p></div>
+<div class="card"><span class="pill">STEP 3</span><h2 style="margin-top:12px">Prepare for applications</h2><p>Update your resume, practise interview questions and check job eligibility before applying.</p></div>
+</div>
+<section class="card" style="margin-top:20px"><h2>Skills roadmap</h2><ol>{% for item in roadmap %}<li style="padding:8px 0">{{ item }}</li>{% endfor %}</ol></section>
+<section class="card" style="margin-top:20px"><h2>Explore other career paths</h2><div class="grid">{% for name, skills in careers.items() %}<div><strong>{{ name }}</strong><p class="muted">{{ skills|join(" · ") }}</p></div>{% endfor %}</div></section>
+{% endblock %}
